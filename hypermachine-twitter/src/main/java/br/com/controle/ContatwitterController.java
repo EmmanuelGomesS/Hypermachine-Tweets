@@ -13,7 +13,6 @@ import br.com.modelo.ContaTwitter;
 
 @Resource
 public class ContatwitterController {
-	//private static final Logger logger = (Logger) LoggerFactory.getLogger(ProdutoController.class);
 	
 	private final ContaTwitterDao dao;
 	private final Result result;
@@ -25,18 +24,14 @@ public class ContatwitterController {
 	
 	@Restrito
 	public void remover(long id) {
-		ContaTwitter produto = dao.carrega(id);
-		dao.deletar(produto);
+		ContaTwitter conta = dao.carrega(id);
+		dao.deletar(conta);
 		this.result.redirectTo(this).lista();
 		}
 	
 	@Path("contatwitter/lista")
 	@Get
 	public List<ContaTwitter> lista(){
-		List<ContaTwitter> p = dao.listarTudo();
-		for(ContaTwitter pro:p){
-			System.out.println("conta: "+pro.getNome());
-		}
 		return dao.listarTudo();
 	}
 	@Restrito

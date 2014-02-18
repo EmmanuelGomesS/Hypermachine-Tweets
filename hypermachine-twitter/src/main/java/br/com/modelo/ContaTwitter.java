@@ -12,7 +12,6 @@ public class ContaTwitter {
 	@GeneratedValue
     private Long id;
 	
-	
     private String nome;
     
 	public Long getId() {

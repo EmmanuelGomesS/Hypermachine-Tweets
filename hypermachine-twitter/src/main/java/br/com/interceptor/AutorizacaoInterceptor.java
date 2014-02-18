@@ -16,14 +16,14 @@ import br.com.dao.AdministradorDao;
 @Intercepts
 public class AutorizacaoInterceptor implements Interceptor{
 	
-	private final UserInfo usuarioWeb;
+	private final UsuarioWeb userinfo;
 	private final Result result;
 	private final AdministradorDao dao;
 	
-	public AutorizacaoInterceptor(UserInfo usuarioWeb,AdministradorDao dao,Result result) {
+	public AutorizacaoInterceptor(UsuarioWeb userinfo,AdministradorDao dao,Result result) {
 		this.dao = dao;
 		this.result = result;
-		this.usuarioWeb = usuarioWeb;
+		this.userinfo = userinfo;
 	}
 	
 	public void intercept(InterceptorStack stack, ResourceMethod method,
@@ -45,7 +45,9 @@ public class AutorizacaoInterceptor implements Interceptor{
 
 	public boolean accepts(ResourceMethod method) {
 		// TODO Auto-generated method stub
-		return !this.usuarioWeb.isLogado() && method.containsAnnotation(Restrito.class);
+		
+		return !this.userinfo.isLogado() && method.containsAnnotation(Restrito.class);
+		
 	}
 
 }

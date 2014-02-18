@@ -6,7 +6,7 @@ import br.com.modelo.Administrador;
 
 @Component
 @SessionScoped
-public class UserInfo {
+public class UsuarioWeb {
 	
 	private Administrador logado;
 	

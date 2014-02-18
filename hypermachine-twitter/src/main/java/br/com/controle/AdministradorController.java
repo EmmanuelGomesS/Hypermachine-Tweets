@@ -9,7 +9,7 @@ import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 
 import br.com.dao.AdministradorDao;
-import br.com.interceptor.UserInfo;
+import br.com.interceptor.UsuarioWeb;
 import br.com.modelo.Administrador;
 
 @Resource
@@ -18,18 +18,19 @@ public class AdministradorController {
 	private AdministradorDao dao;
 	private Result result;
 	private Validator validator;
-	private final UserInfo userinfo;
+	private final UsuarioWeb userinfo;
 	
 	
-	public AdministradorController(AdministradorDao dao,Result result,Validator validator,UserInfo usuarioWeb) {
-		this.userinfo = usuarioWeb;
+	public AdministradorController(AdministradorDao dao,Result result,Validator validator,UsuarioWeb userinfo) {
+		this.userinfo = userinfo;
 		this.validator = validator;
 		this.result = result;
 		this.dao = dao;
 	}
 	
 	
-	@Get("/login")
+	@Path("/")
+	@Get
 	public void loginForm(){
 		
 	}
@@ -37,13 +38,13 @@ public class AdministradorController {
 	public void login(Administrador usuario){
 		Administrador carregado = dao.carregar(usuario);
 		if(carregado==null){
-			validator.add(new ValidationMessage("Login ou Senha Incorretos", "usuario.login"));
-			System.out.println("Veio Usuario Null");
-			
+			validator.add(new ValidationMessage("Login ou Senha Incorretos", "usuario"));
 		}
 		validator.onErrorUsePageOf(this).loginForm();
 		userinfo.login(carregado);
-		result.redirectTo(ContatwitterController.class).lista();
+		System.out.println("Usuario: "+userinfo.getNome());
+		
+		result.redirectTo(ContatwitterController.class).menu();
 		System.out.println("Veio Redirecionando");
 	
 	}

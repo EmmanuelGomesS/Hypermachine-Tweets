@@ -42,10 +42,8 @@ public class AdministradorController {
 		}
 		validator.onErrorUsePageOf(this).loginForm();
 		userinfo.login(carregado);
-		System.out.println("Usuario: "+userinfo.getNome());
 		
-		result.redirectTo(ContatwitterController.class).menu();
-		System.out.println("Veio Redirecionando");
+		result.redirectTo(UsertwitterController.class).menu();
 	
 	}
 	@Path("/logout")

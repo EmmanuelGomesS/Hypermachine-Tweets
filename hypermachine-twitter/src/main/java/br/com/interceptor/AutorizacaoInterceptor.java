@@ -9,7 +9,7 @@ import br.com.caelum.vraptor.core.InterceptorStack;
 import br.com.caelum.vraptor.interceptor.Interceptor;
 import br.com.caelum.vraptor.resource.ResourceMethod;
 import br.com.caelum.vraptor.validator.ValidationMessage;
-import br.com.controle.ContatwitterController;
+import br.com.controle.UsertwitterController;
 import br.com.controle.AdministradorController;
 import br.com.dao.AdministradorDao;
 
@@ -29,22 +29,10 @@ public class AutorizacaoInterceptor implements Interceptor{
 	public void intercept(InterceptorStack stack, ResourceMethod method,
 			Object resourceInstance) throws InterceptionException {
 		result.redirectTo(AdministradorController.class).loginForm();
-//		if (usuarioWeb.getUser() == null) {
-//    		// remember added parameters will survive one more request, when there is a redirect
-//    		result.include("errors", Arrays.asList(new ValidationMessage("Usuario Nao estar Logado", "usuario")));
-//    		result.redirectTo(UsuariosController.class).loginForm();
-//    	} else {
-//	    	dao.refresh(usuarioWeb.getUser());
-//	    	// continues execution
-//	    	stack.next(method, resourceInstance);
-//	    	result.redirectTo(ProdutoController.class).lista();
-//    	}
-		
 		
 	}
 
 	public boolean accepts(ResourceMethod method) {
-		// TODO Auto-generated method stub
 		
 		return !this.userinfo.isLogado() && method.containsAnnotation(Restrito.class);
 		

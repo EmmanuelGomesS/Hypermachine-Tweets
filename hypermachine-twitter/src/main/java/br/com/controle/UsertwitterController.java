@@ -9,17 +9,17 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
-import br.com.dao.ContaTwitterDao;
+import br.com.dao.UserTwitterDao;
 import br.com.interceptor.Restrito;
-import br.com.modelo.ContaTwitter;
+import br.com.modelo.UserTwitter;
 
 @Resource
-public class ContatwitterController {
+public class UsertwitterController {
 	
-	private final ContaTwitterDao dao;
+	private final UserTwitterDao dao;
 	private final Result result;
 	private final Validator validator;
-	public ContatwitterController(ContaTwitterDao dao,Result result,Validator validator) {
+	public UsertwitterController(UserTwitterDao dao,Result result,Validator validator) {
 		this.result = result;
 		this.dao = dao;
 		this.validator = validator;
@@ -32,7 +32,7 @@ public class ContatwitterController {
 	
 	@Restrito
 	public void remover(long id) {
-		ContaTwitter conta = dao.carrega(id);
+		UserTwitter conta = dao.carrega(id);
 		dao.deletar(conta);
 		this.result.redirectTo(this).lista();
 		}
@@ -40,7 +40,7 @@ public class ContatwitterController {
 	@Path("contatwitter/lista")
 	@Get
 	@Restrito
-	public List<ContaTwitter> lista(){
+	public List<UserTwitter> lista(){
 		return dao.listarTudo();
 	}
 	@Restrito
@@ -50,9 +50,9 @@ public class ContatwitterController {
 	}
 	@Restrito
 	@Path("contatwitter/adiciona")
-	public void adiciona(ContaTwitter contaTwitter) {
+	public void adiciona(UserTwitter contaTwitter) {
 		if(contaTwitter.getNome() == null || contaTwitter.getNome().length()<2){
-			validator.add(new ValidationMessage("Campo conta invalido verifique e tente novamente", "contaTwitter"));
+			validator.add(new ValidationMessage("Campo conta invalido verifique e tente novamente. Preencha por exemplo (@Nome)", "contaTwitter"));
 		}
 		validator.onErrorUsePageOf(this).formulario();
 		 dao.salvar(contaTwitter);

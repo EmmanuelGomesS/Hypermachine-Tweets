@@ -1,5 +1,6 @@
 package br.com.testeTwitter;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import br.com.util.Validador;
@@ -52,24 +53,16 @@ public class TestTweets {
 		 UserTwitterDao dao = new UserTwitterDao(session);
 		 
 		 List<UserTwitter> lista = dao.listarTudo();
-		 System.out.println("Veio 1");
 		 for(UserTwitter usr:lista){
 			 String usuario = usr.getNome();
 			 try{
-				 	System.out.println("Veio 2 , Usuario: "+usuario);
 			        List<Status> estatus = twitterUtil.getTweets(usuario);
-			        //System.out.println("Size: "+estatus.size());
-			        System.out.println("Size: "+estatus.size());
 			        for(Status s : estatus){
-			        	System.out.println("Veio 4");
 			        	Date date = new Date();
 			        	date.setDate(s.getCreatedAt().getDate());
 			        	date.setMonth(s.getCreatedAt().getMonth());
 			        	date.setYear(s.getCreatedAt().getYear());
-			        	//String data = date.getDate()+"/"+date.getMonth()+"/"+(date.getYear()+1900);
-			        	System.out.println("Data: "+date.getDate()+"/"+date.getMonth()+"/"+(date.getYear()+1900));
-			        	
-			        	
+			        				        	
 			        	URLEntity[] urlEntities = s.getURLEntities();
 			        	for(int i = 0;i<urlEntities.length;i++){
 			        		System.out.println("Veio no for URL");
@@ -79,13 +72,26 @@ public class TestTweets {
 			        			String idYoutube = validador.buscarIDYoutubeURL(url);
 			        			Video video = youtubeUtil.retrieveVideos(idYoutube);
 			        			if(video.getCategoria().equals("Music")){
-			        				
-			        				videoDao.salvar(video);
-			        				System.out.println("Adicionou o video ao banco");
 			        				Tweets tweets = new Tweets(video, usr,date , popularidade);
-			        				tweetsDao.salvar(tweets);
-			        				System.out.println("Adicionou uma nova postagem");
-			        				
+			        				Collection<Tweets> existe = tweetsDao.carrega(usr);
+			        				boolean liberado =true;
+			        				for(Tweets t:existe){
+			        					if(t.getVideo().getLocation().equals(video.getLocation())){
+			        						System.out.println("Liberado é igual a false,    Tweets: "+tweets);
+			        						liberado = false;
+//			        						tweets.setId(t.getId());
+//			        						//tweets.getVideo().setId(t.getVideo().getId());
+//			        						tweetsDao.atualizar(tweets);
+			        						break;
+			        					}
+			        				}
+			        				if(liberado==true){
+			        					System.out.println("Liberado é igual a false mesmo assim veio...rsrsrsr");
+			        					videoDao.salvar(video);
+			        					System.out.println("Adicionou o video ao banco");
+			        					tweetsDao.salvar(tweets);
+				        				System.out.println("Adicionou uma nova postagem");
+			        				}
 			        			}
 			        		}
 			        		

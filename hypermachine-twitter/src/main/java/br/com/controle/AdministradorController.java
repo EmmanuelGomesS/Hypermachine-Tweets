@@ -29,10 +29,10 @@ public class AdministradorController {
 	}
 	
 	
-	@Path("/")
+	@Path("/loginForm")
 	@Get
 	public void loginForm(){
-		
+		System.out.println("Veio FormLogin");
 	}
 	@Post("/login")
 	public void login(Administrador usuario){

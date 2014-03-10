@@ -55,7 +55,9 @@ public class SalvarTweets {
 		 List<UserTwitter> lista = dao.listarTudo();
 		 for(UserTwitter usr:lista){
 			 String usuario = usr.getNome();
-			 try{
+			 try{	
+				 	System.out.println("Conectando com o Twitter.... \n " +
+				 			"Obtendo o Status do Usuario... \n");
 			        List<Status> estatus = twitterUtil.getTweets(usuario);
 			        for(Status s : estatus){
 			        	Date date = new Date();
@@ -65,11 +67,12 @@ public class SalvarTweets {
 			        				        	
 			        	URLEntity[] urlEntities = s.getURLEntities();
 			        	for(int i = 0;i<urlEntities.length;i++){
-			        		System.out.println("Veio no for URL");
 			        		int popularidade = s.getFavoriteCount();/// DEFINIR COMO POPULARIDADE DAS POSTAGEM <<<<<=======
 			        		String url = urlEntities[i].getExpandedURL();
 			        		if(validador.verificarURL(url).equals("youtube.com")){
 			        			String idYoutube = validador.buscarIDYoutubeURL(url);
+			        			System.out.println("Conectando com o Youtube.... \n" +
+			        					" Pesquisando Videos Postados pelo Usuario... \n");
 			        			Video video = youtubeUtil.retrieveVideos(idYoutube);
 			        			if(video.getCategoria().equals("Music")){
 			        				Tweets tweets = new Tweets(video, usr,date , popularidade);
@@ -91,7 +94,7 @@ public class SalvarTweets {
 			        		
 			        		
 			        	}
-			        	System.out.println("========================================================== \n\n");
+			        	
 			        }
 			        }catch(Exception e){
 			        	e.printStackTrace();
@@ -102,10 +105,6 @@ public class SalvarTweets {
 		 }
 		 
 		 
-	}
-	public void listUserTwitter(){
-		UserTwitterDao dao = new UserTwitterDao(session);
-		List<UserTwitter> lista = dao.listarTudo();
 	}
 	public static void main(String[] args) {
 		new SalvarTweets();

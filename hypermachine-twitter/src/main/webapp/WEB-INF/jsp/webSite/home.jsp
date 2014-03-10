@@ -33,7 +33,8 @@
 						<ul>
 						<li><a href="#">Videos</a>
 							<ul>
-								<li><a href="#">Todos Videos</a></li>
+								<li><a href="<c:url value="/listavideos"/>">Todos Videos</a></li>
+								
 								<li><a href="#">Top 10</a></li>
 								<li><a href="#">Mais Vistos</a></li>
 							</ul>

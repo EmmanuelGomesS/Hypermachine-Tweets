@@ -39,14 +39,14 @@
     	<form class="busca" >
 	    	<ul id="menuElementos">
 	        	<c:if test="${usuarioWeb.logado }">
-	        				<li><a href="<c:url value="/contatwitter/menu"/>">
+	        				<li><a href="<c:url value="/usertwitter/menu"/>">
 							Menu </a></li>
-							<li><a href="<c:url value="/contatwitter/formulario"/>">
-							Cadastar Novo Twitter
+							<li><a href="<c:url value="/usertwitter/formulario"/>">
+							Cadastar
 							</a></li>
 						
-							<li><a href="<c:url value="/contatwitter/lista"/>">
-							Lista Twitter Cadastrado
+							<li><a href="<c:url value="/usertwitter/lista"/>">
+							Listar
 							</a></li>
 						</ul>
 				</c:if>

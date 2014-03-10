@@ -11,7 +11,7 @@
 		</thead>
 		<tbody>
 			
-			<c:forEach items="${contaTwitterList}" var="contaTwitter">
+			<c:forEach items="${contaTwitter}" var="contaTwitter">
 				<tr>
 					
 					<td>${contaTwitter.nome}</td>

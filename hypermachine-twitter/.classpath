@@ -18,18 +18,18 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/apiyoutube/lib/gdata-client-1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/apiyoutube/lib/gdata-core-1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/apiyoutube/lib/gdata-maps-2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/apiyoutube/lib/gdata-media-1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/apiyoutube/lib/gdata-youtube-2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/apiyoutube/lib/google-api-services-youtube-v3-rev79-1.17.0-rc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/apiyoutube/lib/google-collect-1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/apiyoutube/lib/mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Twitter4j/lib/twitter4j-async-3.0.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Twitter4j/lib/twitter4j-core-3.0.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Twitter4j/lib/twitter4j-examples-3.0.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Twitter4j/lib/twitter4j-media-support-3.0.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Twitter4j/lib/twitter4j-stream-3.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib/twitter4j-async-3.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib/twitter4j-core-3.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib/twitter4j-examples-3.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib/twitter4j-media-support-3.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib/twitter4j-stream-3.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib1/gdata-client-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib1/gdata-core-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib1/gdata-maps-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib1/gdata-media-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib1/gdata-youtube-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib1/google-api-services-youtube-v3-rev79-1.17.0-rc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib1/google-collect-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emanuel.Emmanuel/Desktop/hyper/lib1/mail.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

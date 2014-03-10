@@ -1,4 +1,4 @@
-package br.com.testeTwitter;
+package br.com.util;
 
 import java.util.Collection;
 import java.util.Date;
@@ -21,7 +21,7 @@ import br.com.modelo.UserTwitter;
 import br.com.modelo.Video;
 import br.com.util.TwitterUtil;
 
-public class TestTweets {
+public class SalvarTweets {
 	
 	private TwitterUtil twitterUtil;
 	private Validador validador;
@@ -34,7 +34,7 @@ public class TestTweets {
 	private Session session ;
 
 	
-	public TestTweets() {
+	public SalvarTweets() {
 		this.configuration = new AnnotationConfiguration();
 		this.validador = new Validador();
 		configuration.configure();
@@ -108,7 +108,7 @@ public class TestTweets {
 		List<UserTwitter> lista = dao.listarTudo();
 	}
 	public static void main(String[] args) {
-		new TestTweets();
+		new SalvarTweets();
 		
 	}
 

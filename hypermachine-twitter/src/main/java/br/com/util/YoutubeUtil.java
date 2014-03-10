@@ -1,6 +1,8 @@
 package br.com.util;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,9 +16,12 @@ import com.google.gdata.data.youtube.VideoEntry;
 import com.google.gdata.data.youtube.VideoFeed;
 import com.google.gdata.data.youtube.YouTubeMediaGroup;
 
+
 public class YoutubeUtil {
 	
 	 private static final String YOUTUBE_URL = "http://gdata.youtube.com/feeds/api/videos/";
+	 private static final String YOUTUBE_EMBEDDED_URL = "http://www.youtube.com/embed/";
+
 	 private String clientID ;
 	 
 	 private int maxResults = 1;
@@ -40,14 +45,14 @@ public class YoutubeUtil {
        VideoFeed videoFeed = service.query(query, VideoFeed.class); 
       
        List<VideoEntry> videos = videoFeed.getEntries();       
-       return convertVideos(videos);
+       return convertVideos(videos,textQuery);
  
    }
 
-	private Video convertVideos(List<VideoEntry> videos) {
+	private Video convertVideos(List<VideoEntry> videos , String idYoutube) {
 		VideoEntry videoEntry = videos.get(0);
 		YouTubeMediaGroup mediaGroup = videoEntry.getMediaGroup();
-        String webPlayerUrl = mediaGroup.getPlayer().getUrl();
+        String webPlayerUrl = validarURL(YOUTUBE_EMBEDDED_URL+idYoutube);
       
         List<MediaCategory> categories = mediaGroup.getCategories();
         String categoria ="";
@@ -65,4 +70,14 @@ public class YoutubeUtil {
        return video;
  
    }
+	private String validarURL(String url){
+		List<String> strings = new ArrayList<String>();
+		strings.addAll(Arrays.asList(url.split("=")));
+		String urlvalida ="";
+		for(String str:strings){
+			urlvalida+=str;
+		}
+		
+		return urlvalida;
+	}
 }

@@ -14,6 +14,10 @@ public class Video {
     private String categoria;
     private String location;
     private String img;
+    
+    public Video() {
+		// TODO Auto-generated constructor stub
+	}
 
     public Video(String titulo,String categoria,String location,String img) {
          super();

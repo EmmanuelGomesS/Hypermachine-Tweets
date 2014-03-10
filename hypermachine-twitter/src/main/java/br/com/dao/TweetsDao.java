@@ -10,7 +10,6 @@ import org.hibernate.Transaction;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.modelo.Tweets;
 import br.com.modelo.UserTwitter;
-
 @Component
 public class TweetsDao {
 	
@@ -32,7 +31,6 @@ public class TweetsDao {
 		Transaction tx =  session.beginTransaction();
 		session.update(tweets);
 		tx.commit();
-		System.out.println("Rsrsrsr   Atualizando.....");
 		
 	}
 

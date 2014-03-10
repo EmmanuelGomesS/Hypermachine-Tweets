@@ -32,6 +32,10 @@ public class Tweets {
     
     private int popularidade;
     
+    public Tweets() {
+		// TODO Auto-generated constructor stub
+	}
+    
     public Tweets(Video video,UserTwitter usertwitter,Date data,int popularidade) {
     	this.video = video;
     	this.usertwitter = usertwitter;

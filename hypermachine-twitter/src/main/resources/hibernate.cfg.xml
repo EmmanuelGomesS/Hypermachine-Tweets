@@ -21,7 +21,7 @@
 		
 		<mapping class="br.com.modelo.Administrador" />
 		<mapping class="br.com.modelo.UserTwitter" />
-		<mapping class="br.com.modelo.Video" />
+		<mapping class="br.com.modelo.Midia" />
 		<mapping class="br.com.modelo.Tweets" />
 	</session-factory>
 	

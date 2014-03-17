@@ -15,7 +15,7 @@ import br.com.dao.VideoDao;
 import br.com.interceptor.UsuarioWeb;
 import br.com.modelo.Tweets;
 import br.com.modelo.UserTwitter;
-import br.com.modelo.Video;
+import br.com.modelo.Midia;
 
 @Resource
 public class WebSiteController {
@@ -38,12 +38,12 @@ public class WebSiteController {
 	@Get
 	public void home(){
 		List<Tweets> tweets = tweetsDao.listarTudo();
-		Video v=null;
+		Midia v=null;
 		int popular =0;
 		for(Tweets tw:tweets){
 			if(tw.getPopularidade()>popular){
 				popular = tw.getPopularidade();
-				v=tw.getVideo();
+				v=tw.getMidia();
 			}
 			
 			
@@ -63,7 +63,7 @@ public class WebSiteController {
 			t.setData(tw.getData());
 			t.setPopularidade(tw.getPopularidade());
 			t.setUsertwitter(tw.getUsertwitter());
-			t.setVideo(tw.getVideo());
+			t.setMidia(tw.getMidia());
 			litweets.add(t);
 		}
 		

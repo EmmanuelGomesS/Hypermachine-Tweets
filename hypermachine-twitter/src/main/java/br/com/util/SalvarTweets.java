@@ -18,7 +18,7 @@ import br.com.dao.UserTwitterDao;
 import br.com.dao.VideoDao;
 import br.com.modelo.Tweets;
 import br.com.modelo.UserTwitter;
-import br.com.modelo.Video;
+import br.com.modelo.Midia;
 import br.com.util.TwitterUtil;
 
 public class SalvarTweets {
@@ -73,13 +73,13 @@ public class SalvarTweets {
 			        			String idYoutube = validador.buscarIDYoutubeURL(url);
 			        			System.out.println("Conectando com o Youtube.... \n" +
 			        					" Pesquisando Videos Postados pelo Usuario... \n");
-			        			Video video = youtubeUtil.retrieveVideos(idYoutube);
+			        			Midia video = youtubeUtil.retrieveVideos(idYoutube);
 			        			if(video.getCategoria().equals("Music")){
 			        				Tweets tweets = new Tweets(video, usr,date , popularidade);
 			        				Collection<Tweets> existe = tweetsDao.carrega(usr);
 			        				boolean liberado =true;
 			        				for(Tweets t:existe){
-			        					if(t.getVideo().getLocation().equals(video.getLocation())){
+			        					if(t.getMidia().getLocation().equals(video.getLocation())){
 			        						liberado = false;
 
 			        						break;

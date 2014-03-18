@@ -12,7 +12,7 @@ import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.com.dao.UserTwitterDao;
 import br.com.interceptor.Restrito;
 import br.com.modelo.UserTwitter;
-import br.com.util.SalvarTweets;
+import br.com.util.TweetsUser;
 
 @Resource
 public class UsertwitterController {
@@ -66,7 +66,7 @@ public class UsertwitterController {
 		}
 		validator.onErrorUsePageOf(this).formulario();
 		 dao.salvar(contaTwitter);
-		 new SalvarTweets();
+		 new TweetsUser();
 		 this.result.redirectTo(this).lista();
 		 }
 

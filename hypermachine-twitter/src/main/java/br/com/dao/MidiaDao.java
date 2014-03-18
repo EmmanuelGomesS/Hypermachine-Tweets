@@ -8,11 +8,11 @@ import br.com.caelum.vraptor.ioc.Component;
 import br.com.modelo.Midia;
 
 @Component
-public class VideoDao {
+public class MidiaDao {
 	
 	
 	private final Session session;
-	public VideoDao(Session session) {
+	public MidiaDao(Session session) {
 		this.session = session;
 	}
 	

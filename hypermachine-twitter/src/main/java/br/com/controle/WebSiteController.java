@@ -11,7 +11,7 @@ import br.com.caelum.vraptor.Validator;
 import br.com.dao.AdministradorDao;
 import br.com.dao.TweetsDao;
 import br.com.dao.UserTwitterDao;
-import br.com.dao.VideoDao;
+import br.com.dao.MidiaDao;
 import br.com.interceptor.UsuarioWeb;
 import br.com.modelo.Tweets;
 import br.com.modelo.UserTwitter;
@@ -20,12 +20,12 @@ import br.com.modelo.Midia;
 @Resource
 public class WebSiteController {
 	
-	private VideoDao videoDao;
+	private MidiaDao videoDao;
 	private TweetsDao tweetsDao;
 	private UserTwitterDao userDao;
 	private Result result;
 	
-	public WebSiteController(VideoDao videoDao,UserTwitterDao userDao,TweetsDao tweetsDao,Result result) {
+	public WebSiteController(MidiaDao videoDao,UserTwitterDao userDao,TweetsDao tweetsDao,Result result) {
 		
 		this.result = result;
 		
@@ -38,19 +38,22 @@ public class WebSiteController {
 	@Get
 	public void home(){
 		List<Tweets> tweets = tweetsDao.listarTudo();
-		Midia v=null;
+		Midia video=null;
 		int popular =0;
 		for(Tweets tw:tweets){
 			if(tw.getPopularidade()>popular){
-				popular = tw.getPopularidade();
-				v=tw.getMidia();
+				if(tw.getMidia().getTipo().equals("Youtube")){
+					popular = tw.getPopularidade();
+					video=tw.getMidia();
+				}
+				
 			}
 			
 			
 		}
 		
 		
-		result.include("v", v);
+		result.include("video", video);
 	}
 	@Path("/listavideos")
 	@Get

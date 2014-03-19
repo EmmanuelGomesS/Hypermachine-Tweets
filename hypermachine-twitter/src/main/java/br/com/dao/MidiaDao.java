@@ -25,6 +25,8 @@ public class MidiaDao {
 	public List<Midia> listarTudo() {
 		return session.createCriteria(Midia.class).list();
 	}
-
+	public Midia carrega(long id) {
+		return (Midia) this.session.load(Midia.class, id);
+	}
 
 }

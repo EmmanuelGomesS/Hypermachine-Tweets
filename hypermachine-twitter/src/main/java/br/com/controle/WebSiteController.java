@@ -7,29 +7,27 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.Validator;
-import br.com.dao.AdministradorDao;
 import br.com.dao.TweetsDao;
 import br.com.dao.UserTwitterDao;
 import br.com.dao.MidiaDao;
-import br.com.interceptor.UsuarioWeb;
+import br.com.modelo.Midia;
 import br.com.modelo.Tweets;
 import br.com.modelo.UserTwitter;
-import br.com.modelo.Midia;
 
 @Resource
 public class WebSiteController {
 	
-	private MidiaDao videoDao;
+	private MidiaDao midiaDao;
 	private TweetsDao tweetsDao;
 	private UserTwitterDao userDao;
 	private Result result;
+	private List<UserTwitter> litUsres;
 	
-	public WebSiteController(MidiaDao videoDao,UserTwitterDao userDao,TweetsDao tweetsDao,Result result) {
+	public WebSiteController(MidiaDao midiaDao,UserTwitterDao userDao,TweetsDao tweetsDao,Result result) {
 		
 		this.result = result;
 		
-		this.videoDao = videoDao;
+		this.midiaDao = midiaDao;
 		this.userDao = userDao;
 		this.tweetsDao = tweetsDao;
 	}
@@ -38,39 +36,68 @@ public class WebSiteController {
 	@Get
 	public void home(){
 		List<Tweets> tweets = tweetsDao.listarTudo();
-		Midia video=null;
+		Midia v=null;
 		int popular =0;
 		for(Tweets tw:tweets){
 			if(tw.getPopularidade()>popular){
-				if(tw.getMidia().getTipo().equals("Youtube")){
-					popular = tw.getPopularidade();
-					video=tw.getMidia();
+				popular = tw.getPopularidade();
+				if(tw.getMidia().getTipo().equals("Youtube")){//Modifiquei
+					v= tw.getMidia();
 				}
-				
 			}
-			
-			
 		}
-		
-		
-		result.include("video", video);
+		listavideos();
+		listamusicas();
+		result.include("v", v);
 	}
+	
+	
 	@Path("/listavideos")
 	@Get
 	public void listavideos(){
-		List<Tweets> litweets = new ArrayList<Tweets>();
+		//Lista Videos Usando o Youtube
+		List<Midia> litvideos = new ArrayList<Midia>();
 		List<Tweets> tweets = tweetsDao.listarTudo();
 		for(Tweets tw:tweets){
-			Tweets t = new Tweets();
-			t.setId(tw.getId());
-			t.setData(tw.getData());
-			t.setPopularidade(tw.getPopularidade());
-			t.setUsertwitter(tw.getUsertwitter());
-			t.setMidia(tw.getMidia());
-			litweets.add(t);
+			if(tw.getMidia().getTipo().equals("Youtube")){
+				litvideos.add(tw.getMidia());
+			}
 		}
-		
-		result.include("litweets", litweets);
+		System.out.println("litvideos: "+litvideos.size());
+		result.include("litvideos", litvideos);
+	}
+	@Path("/listamusicas")
+	@Get
+	public void listamusicas(){
+		//Lista Musicas Usando o Soundcloud
+		List<Midia> litmusicas = new ArrayList<Midia>();
+		List<Tweets> tweets = tweetsDao.listarTudo();
+		for(Tweets tw:tweets){
+			if(tw.getMidia().getTipo().equals("Soundcloud")){
+				litmusicas.add(tw.getMidia());
+			}
+		}
+
+		result.include("litmusicas", litmusicas);
+	}
+
+	public void listaUsuarios(String location){
+		//Lista Usuarios que Twwets uma Midia
+		List<Tweets> tweets = tweetsDao.listarTudo();
+		litUsres = new ArrayList<UserTwitter>();
+		for(Tweets tw:tweets){
+			if(tw.getMidia().getLocation().equals(location)){
+				litUsres.add(tw.getUsertwitter());
+			}
+		}
+		result.include("litUsres", litUsres);
+	}
+	
+	
+	public void midiaAlbum(int id){
+		//Recebe o Id para pegar o album da midia
+		Midia midia = midiaDao.carrega(id);
+		result.include("midia", midia);
 	}
 	
 }

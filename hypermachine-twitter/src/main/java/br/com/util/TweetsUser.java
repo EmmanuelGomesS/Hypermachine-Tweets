@@ -32,6 +32,7 @@ public class TweetsUser {
 	
 	private TweetsDao tweetsDao;
 	private MidiaDao videoDao;
+	private UserTwitterDao twitterDao;
 	private AnnotationConfiguration configuration;
 	private SessionFactory factory;
 	private Session session ;
@@ -48,7 +49,8 @@ public class TweetsUser {
 		soundcloudUtil = new SoundcloudUtil();
 		this.videoDao = new MidiaDao(session);
 		this.tweetsDao = new TweetsDao(session);
-		inicio();
+		this.twitterDao = new UserTwitterDao(session);
+
 		 
 	}
 	public void inicio(){
@@ -59,25 +61,31 @@ public class TweetsUser {
 		 List<UserTwitter> lista = dao.listarTudo();
 		 for(UserTwitter usr:lista){
 			 String usuario = usr.getNome();
+			 System.out.println("Usuario: "+usuario);
+			 String avatar = null;
 			 try{
 			        List<Status> estatus = twitterUtil.getTweets(usuario);
 			        for(Status s : estatus){
+			        	avatar = s.getUser().getProfileImageURL();
 			        	Date date = new Date();
 			        	date.setDate(s.getCreatedAt().getDate());
 			        	date.setMonth(s.getCreatedAt().getMonth());
 			        	date.setYear(s.getCreatedAt().getYear());
-			        				        	
+			        	
 			        	URLEntity[] urlEntities = s.getURLEntities();
 			        	for(int i = 0;i<urlEntities.length;i++){
-			        		System.out.println("Veio no for URL");
+			        		//System.out.println("Veio no for URL");
 			        		int popularidade = s.getFavoriteCount();/// DEFINIR COMO POPULARIDADE DAS POSTAGEM <<<<<=======
 			        		String url = urlEntities[i].getExpandedURL();
-			        		
-			        		if(validador.verificarURL(url).equals("youtube.com")){
+		        			System.out.println("Usuario: "+usuario+"     URL: "+url);
+
+			        		if(url.contains("youtube.com")){
 			        			String idYoutube = validador.buscarIDYoutubeURL(url);
-			        			System.out.println("idYoutube: "+idYoutube);
+			        			//System.out.println("idYoutube: "+idYoutube);
 			        			Midia video = youtubeUtil.retrieveVideos(idYoutube);
-			        			if(video.getCategoria().equals("Music")){
+			        			System.out.println("Usuario: "+usuario+"     Categoria Musica: "+video.getCategoria());
+			        			if(video.getCategoria().equals("Music")||video.getCategoria().equals("Música")){
+			        				
 			        				Tweets tweets = new Tweets(video, usr,date , popularidade);
 			        				adicionar(tweets, video, usr);
 			        			}
@@ -96,6 +104,10 @@ public class TweetsUser {
 			        	e.printStackTrace();
 			        	System.out.println("Problema na Conexao com a Rede.....");
 			        }
+			 usr.setAvatar(avatar);
+			 this.twitterDao.atualizar(usr);
+			 
+			 
 		}
 	}
 			 
@@ -109,7 +121,10 @@ public class TweetsUser {
 			if(t.getMidia().getLocation().equals(midia.getLocation())){
 				t.setPopularidade(tweets.getPopularidade());
 				tweetsDao.atualizar(t);
+//				Midia m = t.getMidia();
+//				m.setAlbum(midia.getAlbum());
 				System.out.println("Atualizando Dados......");
+				//videoDao.atualizar(m);
 				liberado = false;
 				break;
 			}
@@ -124,7 +139,8 @@ public class TweetsUser {
 	
 	
 	public static void main(String[] args) {
-		new TweetsUser();
+		TweetsUser serv = new TweetsUser();
+		serv.inicio();
 		
 	}
 

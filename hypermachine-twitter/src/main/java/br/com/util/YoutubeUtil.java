@@ -1,11 +1,16 @@
 package br.com.util;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import soundcloud.Search;
 import br.com.modelo.Midia;
 
 import com.google.gdata.client.youtube.YouTubeQuery;
@@ -15,6 +20,8 @@ import com.google.gdata.data.media.mediarss.MediaThumbnail;
 import com.google.gdata.data.youtube.VideoEntry;
 import com.google.gdata.data.youtube.VideoFeed;
 import com.google.gdata.data.youtube.YouTubeMediaGroup;
+import com.soundcloud.api.Http;
+import com.soundcloud.api.Soundcloud;
 
 
 public class YoutubeUtil {
@@ -26,9 +33,12 @@ public class YoutubeUtil {
 	 
 	 private int maxResults = 1;
      private int timeout = 2000;
+     
+     private Search google;
 	 
 	public YoutubeUtil() {
 		this.clientID = "181714817003-fh033t66nvp1854ipha0fjkhrf3f8asb.apps.googleusercontent.com";// Id de Desenvolvedor do Google
+		google = new Search();
 	}
 	
 	public Midia retrieveVideos(String idYoutube) throws Exception {
@@ -54,7 +64,7 @@ public class YoutubeUtil {
 			VideoEntry videoEntry = videos.get(0);
 			String tipo="Youtube";
 			YouTubeMediaGroup mediaGroup = videoEntry.getMediaGroup();
-	        String location = validarURL(YOUTUBE_EMBEDDED_URL+idYoutube);
+	        String location = validarURL(idYoutube);
 	      
 	        List<MediaCategory> categories = mediaGroup.getCategories();
 	        String categoria ="";
@@ -66,12 +76,48 @@ public class YoutubeUtil {
 	            thumbnails.add(mediaThumbnail.getUrl());
 	        }
 	        String title = videoEntry.getTitle().getPlainText();//titulo video
-	        String img = thumbnails.get(1);
-	        Midia video = new Midia(title, location, categoria, "", "", tipo);
+	        JSONObject json =google(title);
+	        Midia video = null;
+	        try {
+	        	if(json!=null){
+	        		String genero = "";
+	        		if(json.get("genre").equals("null")){
+	        			 genero = (String)json.get("genre").toString();
+	        		}
+	        		
+					String album = (String) json.get("artwork_url").toString();
+					video = new Midia(title, location, categoria,album, genero, tipo);
+	        	}else{
+					video = new Midia(title, location, categoria,"http://static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg","", tipo);
+	        	}
+				
+			} catch (JSONException e) {
+				
+				
+			}
+	        
+	        
+	        
 			
 	       return video;
 	 
 	   }
+		private JSONObject google(String titulo){
+			String url = google.search(titulo);
+			JSONObject json = null;
+			if(url!=null && url.contains("soundcloud.com")){
+				Soundcloud soundcloud = new Soundcloud();
+				String trankid;
+				try {
+					trankid = soundcloud.getApiUrlFromPermalink(url);
+					json = Http.getJSON(soundcloud.getHttpResponse(trankid));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return json;
+		}
 		private String validarURL(String url){
 			List<String> strings = new ArrayList<String>();
 			strings.addAll(Arrays.asList(url.split("=")));
@@ -80,7 +126,6 @@ public class YoutubeUtil {
 				urlvalida+=str;
 			}
 			
-			System.out.println("URL VALIDA: "+urlvalida);
 			return urlvalida;
 		}
 	}

@@ -66,7 +66,6 @@ public class UsertwitterController {
 		}
 		validator.onErrorUsePageOf(this).formulario();
 		 dao.salvar(contaTwitter);
-		 new TweetsUser();
 		 this.result.redirectTo(this).lista();
 		 }
 

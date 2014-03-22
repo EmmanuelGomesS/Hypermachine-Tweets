@@ -7,9 +7,9 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.dao.MidiaDao;
 import br.com.dao.TweetsDao;
 import br.com.dao.UserTwitterDao;
-import br.com.dao.MidiaDao;
 import br.com.modelo.Midia;
 import br.com.modelo.Tweets;
 import br.com.modelo.UserTwitter;
@@ -35,15 +35,14 @@ public class WebSiteController {
 	@Path("/")
 	@Get
 	public void home(){
+		//Musicas Mais Curtida
 		List<Tweets> tweets = tweetsDao.listarTudo();
 		Midia v=null;
 		int popular =0;
 		for(Tweets tw:tweets){
 			if(tw.getPopularidade()>popular){
 				popular = tw.getPopularidade();
-				if(tw.getMidia().getTipo().equals("Youtube")){//Modifiquei
-					v= tw.getMidia();
-				}
+				v= tw.getMidia();
 			}
 		}
 		listavideos();
@@ -55,15 +54,15 @@ public class WebSiteController {
 	@Path("/listavideos")
 	@Get
 	public void listavideos(){
-		//Lista Videos Usando o Youtube
+		//Lista Musicas Usando o Youtube
 		List<Midia> litvideos = new ArrayList<Midia>();
 		List<Tweets> tweets = tweetsDao.listarTudo();
+				
 		for(Tweets tw:tweets){
 			if(tw.getMidia().getTipo().equals("Youtube")){
 				litvideos.add(tw.getMidia());
 			}
 		}
-		System.out.println("litvideos: "+litvideos.size());
 		result.include("litvideos", litvideos);
 	}
 	@Path("/listamusicas")

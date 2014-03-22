@@ -32,5 +32,9 @@
 	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Arquivo/lib/twitter4j-media-support-3.0.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Arquivo/lib/twitter4j-stream-3.0.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Arquivo/apiSoudcloud/lib/apisoundcloud.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Arquivo/apiSoudcloud/libGoogle/google.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Arquivo/apiSoudcloud/libGoogle/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Arquivo/apiSoudcloud/libGoogle/gson-2.2.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jabez/Desktop/Arquivo/apiSoudcloud/libGoogle/gson-2.2.4-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

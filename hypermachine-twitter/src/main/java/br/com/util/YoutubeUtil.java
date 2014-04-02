@@ -81,7 +81,7 @@ public class YoutubeUtil {
 	        try {
 	        	if(json!=null){
 	        		String genero = "";
-	        		if(json.get("genre").equals("null")){
+	        		if(json.get("genre").equals("null")==false){
 	        			 genero = (String)json.get("genre").toString();
 	        		}
 	        		

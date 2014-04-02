@@ -181,4 +181,23 @@ public class WebSiteController {
 
 			result.include("litmusicas", litmusicas);
 		}
+		
+		@Path("/busca")
+		public void busca(String search){
+			List<Midia> litmusicas = new ArrayList<Midia>();
+			List<Tweets> tweets = tweetsDao.listarTudo();
+			for(Tweets tw:tweets){
+				if(tw.getMidia().getTipo().equals("Soundcloud")){
+					if(tw.getMidia().getTitulo().contains(search)){
+						litmusicas.add(tw.getMidia());
+						System.out.println("DANCE: "+tw.getMidia().getTitulo());
+
+					}
+					
+				}
+			}
+
+			result.include("litmusicas", litmusicas);
+		}
+		
 }

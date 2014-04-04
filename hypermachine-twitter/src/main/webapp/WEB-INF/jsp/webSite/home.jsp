@@ -1,137 +1,118 @@
-<%@ include file="../../../inicio.jspf" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	    <title>Hypermachine Tweets</title>
+		<link href="theme.css" rel="stylesheet">
+	</head>
 
-					<li>
-						<h3>Video Mais Curtido</h3>
-						<a href="produto.html">
-									<iframe width="720" height="480"
-									src="http://www.youtube.com/embed/${v.location}">
-									</iframe>
-								</a>
-								<button type="button" ><a id="bt" href="webSite/listaUsuarios?location=${v.location}" onclick="NovaJanela(this.href,'nomeJanela','450','450','yes');return false">Usuarios Que Tuitaram</a></button>
-								<button type="button" ><a id="bt" href="webSite/midiaAlbum?id=${v.id}" onclick="NovaJanela(this.href,'nomeJanela','450','450','yes');return false">Capa do Album</a></button>
-								
-								<a href="https://twitter.com/share" class="twitter-share-button" data-via="hypermachine_tweets - Gostei da musica" data-url="${v.location}"  data-lang="pt" data-count="none">Tweetar</a>
-								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-								
+<body>
+<div class="wrapper">
+
+
+<div id="head-top">	
+<div class="navbar navbar-inverse" role="navigation">
+		
+	  <div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+
+		</button>
+		<a class="navbar-brand" href="#">Hypermachine Tweets</a>
+	  </div>
+		
+	<div class="collapse navbar-collapse navbar-ex1-collapse">
+	  	<ul class="nav navbar-nav">
+		   <li><a href="#">Home</a></li>
+		  <li><a href="VideoHome.html">Vídeos</a></li>
+		  <li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Músicas <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+			  <li><a href="MusicaHome.html">Diversas</a></li>
+			  <li><a href="rock.html">Rock</a></li>
+			  <li><a href="pop.html">Pop</a></li>
+			  <li><a href="eletronica.html">Eletronica</a></li>
+			  <li><a href="sertanejo.html">Sertanejo</a></li>
+			</ul>
+		  </li>
+		   
+		</ul>
+		<form class="navbar-form navbar-right visible-lg" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Busca">
+				</div>
+		<button type="submit" class="btn btn-primary">Buscar</button>
+		</form>
+
+	</div>
+
+
+</div>
+	
+
+		<div id="myCarousel" class="carousel slide">
+     
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          
+          <div class="container">
+			<div class="row" >
+				
+				<div class="legenda">
+					<h1 class="musi">A música mais popular.</h1>
+						<div class="amusica">
+					      <iframe width="600" height="450"  scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/135550877&amp;auto_play=false&amp;hide_related=false&amp;visual=true"></iframe>
+						</div>
+				</div> 
+			</div>
+          </div>
+        </div>
+        <div class="item">
+			<div class="container">
+				<div class="row">
+					<div class="legenda" >
+						<h1 class="vid">O vídeo mais popular.</h1>
+					</div>
+					<div class="ovideo">
+				
+							<iframe  width="75%"  height="450"  
+								src="http://www.youtube.com/embed/YEFdSUZQ2qU">
+								</iframe>
 						
-					</li>
-			</div><!-- fim .container .destaque -->
-		</div>
-			
-	<div id="destaques">
-			<div class="container paineis">
-				<div class="painel novidades">
-					<h2>Videos</h2>
-					<ol>
-						<li>
-							<c:forEach items="${litvideos}" var="litvideos">
-								<a href="produto.html">
-										
-									  <iframe width="350" height="250"
-										src="http://www.youtube.com/embed/${litvideos.location}">
-									</iframe>
-								</a>
-								
-								<button type="button" ><a id="bt" href="webSite/listaUsuarios?location=${litvideos.location}" onclick="NovaJanela(this.href,'nomeJanela','450','450','yes');return false">Usuarios Que Tuitaram</a></button>
-								<button type="button" ><a id="bt" href="webSite/midiaAlbum?id=${litvideos.id}" onclick="NovaJanela(this.href,'nomeJanela','450','450','yes');return false">Capa do Album</a></button>
-								
-								<a href="https://twitter.com/share" class="twitter-share-button" data-via="hypermachine_tweets - Gostei da musica" data-url="http://www.youtube.com/embed/${litvideos.location}"  data-lang="pt" data-count="none">Tweetar</a>
-								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-								
-							</c:forEach>
-							
-						</li>
-						
-					</ol>
+					</div>
 				</div>
 			</div>
-			<div class="container paineis">
-				
-				<div class="painel mais-vendidos">
-					
-					<h2>Musicas</h2>
-					
-					<ol>
-						<li>
-							<c:forEach items="${litmusicas}" var="litmusicas">
-								
-								<a href="produto.html">
-									  
-									<iframe class="iframe-responsive" width="350" height="250"
-									src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${litmusicas.location}&amp;auto_play=false&amp;hide_related=false&amp;visual=true">
-									</iframe>
-									
-									
-								</a>
-								<button type="button" ><a id="bt" href="webSite/listaUsuarios?location=${litmusicas.location}" onclick="NovaJanela(this.href,'nomeJanela','450','450','yes');return false">Usuarios Que Tuitaram</a></button>
-								<button type="button" ><a id="bt" href="webSite/midiaAlbum?id=${litmusicas.id}" onclick="NovaJanela(this.href,'nomeJanela','450','450','yes');return false">Capa do Album</a></button>
-								
-								<a href="https://twitter.com/share" class="twitter-share-button" data-via="hypermachine_tweets - Gostei da musica" data-url="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${litmusicas.location}"  data-lang="pt" data-count="none">Tweetar</a>
-								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-								
-							</c:forEach>
-							
-						</li>
-						
-					</ol>
-					</div>
-			</div>
-	</div>
-		
-	
-	
-			
-				
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="icon-prev"></span></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="icon-next"></span></a>
+    </div>
 
-		<div>
-			<div class="rodape footer">
-				<!-- <img src="images/logoHT.png" alt="Logo HyperMachine Tweets" class="logo"> -->
-				<ul class="social">
-					<li><a href="https://www.facebook.com/hypermachinetweets">Facebook</a></li>
-					<li><a href="http://twitter.com/hypermachinetweets">Twitter</a></li>
-					<li><a href="http://plus.google.com/hypermachinetweets">Google+</a></li>
-				</ul>
-			</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+						<div class="page-header">
+							<h3>Músicas e Vídeos direto do Twitter!</h3>
+						</div>
 		</div>
+	</div>
 
-	</body>
- <script type="text/javascript">
-$(function(){
+</div>
+
+
+
+<script src="jquery1.js" type="text/javascript"></script>
+
  
-    // Dialog
-    $('.dialog').dialog({
-        autoOpen: false,
-        width: 500,
-        height: 300,
-        buttons: {
-        "Ok": function() {
-        $(this).dialog("close");
-        },
-        "Cancel": function() {
-        $(this).dialog("close");
-        }
-        }
-    });
- 
-    $('.dialog_link').click(function(){
- 
-    $('.dialog').dialog('close');
- 
-    var id_link = $(this).attr('id');
-    var index = id_link.split('_');
- 
-    $('#txt_'+index[1]).dialog('open');
- 
-    return false;
- 
-    });
- 
-    $('.dialog_link, ul.icons li').hover(
-    function() { $(this).addClass('ui-state-hover'); },
-    function() { $(this).removeClass('ui-state-hover'); }
-    );
- 
-});
+<script src="bootstrap.min.js"></script>
+<script>
+ $('.carousel').carousel() 
 </script>
 
+</body>
 </html>

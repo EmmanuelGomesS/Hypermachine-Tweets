@@ -19,10 +19,10 @@
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 					
 					<button id="lk_2" class="dialog_link ui-state-default ui-corner-all but btn-primary" type="button" href="#">Contas</button>
-					<div id="txt_2" class="dialog" title="Contas que twittaram essa mÃºsica!"><h4>Lais<br> Livia<br> Maria<br></h4></div>
+					<div id="txt_2" class="dialog" title="Contas que twittaram essa música!"><h4>@JDBonfim<br>@Adrianogba</h4></div>
 					<button id="lk_3" class="dialog_link ui-state-default ui-corner-all but2 btn-primary" type="button" href="#">Detalhes</button>
-					<div id="txt_3" class="dialog but22" title="Album da mÃºsica!"><img src="large(3).jpg"></div>
-		
+					<div id="txt_3" class="dialog but22" title="Album da música!"><img src="${litvideos.album}"></div>
+				
 					<a id="ssba_facebook_share" href="https://www.facebook.com/dialog/feed?app_id=19507961798&amp;display=popup&amp;redirect_uri=https%3A//youtube.com/fb_popup_callback.html&amp;link=http://www.youtube.com/embed/${litvideos.location}%3Futm_source%3Dyoutube%26utm_campaign%3Dshare%26utm_medium%3Dfacebook" target="_blank"><button class="facebook">Share</button></a>
 				</div> 
 			</div>

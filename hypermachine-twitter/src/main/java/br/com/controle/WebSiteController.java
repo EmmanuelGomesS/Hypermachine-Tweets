@@ -206,11 +206,23 @@ public class WebSiteController {
 			if(search==null){search="default";}
 			for(Tweets tw:tweets){
 				if(tw.getMidia().getTipo().equals("Soundcloud")){
-					if(tw.getMidia().getTitulo().contains(search)){
-						litmusicas.add(tw.getMidia());
-
+					if(tw.getMidia().getTitulo().toUpperCase().contains(search.toUpperCase())){
+						String location = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/"+tw.getMidia().getLocation();
+						String tipo = tw.getMidia().getTipo().toLowerCase();
+						Midia midia = new Midia(null, location, null, tw.getMidia().getAlbum(), null, tipo, tw.getMidia().getImgMidia());
+						litmusicas.add(midia);
 					}
-					
+				}
+				else if(tw.getMidia().getTipo().equals("Youtube")){
+					if(tw.getMidia().getTitulo().toUpperCase().contains(search.toUpperCase())){
+						String location = "http://www.youtube.com/embed/"+tw.getMidia().getLocation();
+						String imgMidia = "http://i.ytimg.com/vi/"+tw.getMidia().getImgMidia()+"/mqdefault.jpg";
+						String tipo = tw.getMidia().getTipo().toLowerCase();
+						
+						Midia midia = new Midia(null, location, null, tw.getMidia().getAlbum(), null, tipo, imgMidia);
+
+						litmusicas.add(midia);
+					}
 				}
 			}
 			result.include("litmusicas", litmusicas);

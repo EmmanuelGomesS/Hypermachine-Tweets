@@ -7,58 +7,20 @@
 		<link href="css/tema.css" rel="stylesheet">
 		<title>Hypermachine Tweets</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
-	<script src="http://assets2.fcbarcelona.com/javascripts/all.114703d6e.js" type="text/javascript"></script>
+	<script src="js/all.114703d6e.js" type="text/javascript"></script>
 	
 	<script type="text/javascript" src="js/jquery.waitforimages.js"></script> 
 	<script type="text/javascript" src="js/jquery.isotope.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
 
 	
 	
     <script src="js/jquery1.js" type="text/javascript"></script>
 	<script src="js/bootstrap.min.js"></script>
-
-	</head>
-	<body>
-		
-		<div class="wrapper">
-			<div class="head-top">	
-				<div class=" nav navbar navbar-inverse" role="navigation">
-						
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"></button>
-						<a class="navbar-brand" href="<c:url value="/"/>">Hypermachine Tweets</a>
-					</div>
-						
-					<div class="collapse navbar-collapse navbar-ex1-collapse">
-					  	<ul class="nav navbar-nav">
-						   <li><a href="<c:url value="/"/>">Home</a></li>
-						  <li><a href="<c:url value="/listavideos"/>">Vídeos</a></li>
-						  <li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Músicas <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-							  <li><a href="<c:url value="/listamusicas"/>">Diversas</a></li>
-							  <li><a href="<c:url value="/rock"/>">Rock</a></li>
-							  <li><a href="<c:url value="/pop"/>">Pop</a></li>
-							  <li><a href="<c:url value="/dance"/>">Dance</a></li>
-							  <li><a href="<c:url value="/forro"/>">Forro</a></li>
-							</ul>
-						  </li>
-						</ul>
-						<form class="navbar-form navbar-right visible-lg" role="search" action="<c:url value="/busca"/>" name="busca" method="POST">
-						
-						  <div class="form-group">
-							<input type="search" class="form-control" placeholder="Busca" name="search">
-						  </div>
-						  <button type="submit" class="btn btn-primary">Buscar</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-<script>
+	
+	<script>
  $('.carousel').carousel() 
 </script>
   <script type="text/javascript">
@@ -123,3 +85,45 @@ $(function(){
 			}});
 
 </script>
+
+	</head>
+	<body>
+		
+		<div class="wrapper">
+			<div class="head-top">	
+				<div class=" nav navbar navbar-inverse" role="navigation">
+						
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"></button>
+						<a class="navbar-brand" href="<c:url value="/"/>">Hypermachine Tweets</a>
+					</div>
+						
+					<div class="collapse navbar-collapse navbar-ex1-collapse">
+					  	<ul class="nav navbar-nav">
+						   <li><a href="<c:url value="/"/>">Home</a></li>
+						  <li><a href="<c:url value="/listavideos"/>">Vídeos</a></li>
+						  <li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Músicas <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+							  <li><a href="<c:url value="/listamusicas"/>">Diversas</a></li>
+							  <li><a href="<c:url value="/rock"/>">Rock</a></li>
+							  <li><a href="<c:url value="/pop"/>">Pop</a></li>
+							  <li><a href="<c:url value="/dance"/>">Dance</a></li>
+							  <li><a href="<c:url value="/forro"/>">Forro</a></li>
+							</ul>
+						  </li>
+						</ul>
+						<form class="navbar-form navbar-right visible-lg" role="search" action="<c:url value="/busca"/>" name="busca" method="POST">
+						
+						  <div class="form-group">
+							<input type="search" class="form-control" placeholder="Busca" name="search">
+						  </div>
+						  <button type="submit" class="btn btn-primary">Buscar</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+

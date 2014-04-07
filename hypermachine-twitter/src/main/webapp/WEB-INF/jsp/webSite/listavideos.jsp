@@ -3,9 +3,9 @@
 
 <div id="container-folio" style="position:relative">
 	<c:forEach items="${litvideos}" var="litvideos">
-		<li>
+		<li class="box col-xs-6 col-md-4 col-sm-6 col-lg-3 graphics design">
 			
-		    <div class="box col-xs-6 col-md-4 col-sm-6 col-lg-3 graphics design">
+		    <div >
 				<div class="thumbnail">
 						
 					      <div class="pull-left thumbnail-video media video-wrap coluna-video">

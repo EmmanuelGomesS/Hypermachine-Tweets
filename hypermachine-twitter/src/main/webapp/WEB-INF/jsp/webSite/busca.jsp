@@ -4,8 +4,8 @@
 <c:forEach items="${litmusicas}" var="litmusicas">
 
 
-<li>
-        <div class="box col-xs-6 col-md-4 col-sm-6 col-lg-3 ">
+<li class="box col-xs-6 col-md-4 col-sm-6 col-lg-3 ">
+        <div >
 		<div class="thumbnail">
 				
 			<div class="pull-left thumbnail-video media video-wrap coluna-musica">

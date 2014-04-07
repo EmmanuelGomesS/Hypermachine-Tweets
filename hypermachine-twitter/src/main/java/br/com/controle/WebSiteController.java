@@ -203,17 +203,16 @@ public class WebSiteController {
 		public void busca(String search){
 			List<Midia> litmusicas = new ArrayList<Midia>();
 			List<Tweets> tweets = tweetsDao.listarTudo();
+			if(search==null){search="default";}
 			for(Tweets tw:tweets){
 				if(tw.getMidia().getTipo().equals("Soundcloud")){
 					if(tw.getMidia().getTitulo().contains(search)){
 						litmusicas.add(tw.getMidia());
-						System.out.println("DANCE: "+tw.getMidia().getTitulo());
 
 					}
 					
 				}
 			}
-
 			result.include("litmusicas", litmusicas);
 		}
 		

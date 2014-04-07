@@ -17,21 +17,29 @@ public  class Midia {
 	private String album;
 	private String genero;
 	private String tipo;
+	private String imgMidia;
 
 
 
     public Midia() {
 		// TODO Auto-generated constructor stub
 	}
-    public Midia(String titulo,String location,String categoria,String album,String genero,String tipo) {
+    public Midia(String titulo,String location,String categoria,String album,String genero,String tipo,String imgMidia) {
     	this.location = location;
          this.titulo = titulo;
          this.categoria = categoria;
          this.album = album;
          this.genero = genero;
          this.tipo = tipo;
+         this.imgMidia =imgMidia;
          
     }
+    public String getImgMidia() {
+		return imgMidia;
+	}
+    public void setImgMidia(String imgMidia) {
+		this.imgMidia = imgMidia;
+	}
     public String getAlbum() {
 		return album;
 	}

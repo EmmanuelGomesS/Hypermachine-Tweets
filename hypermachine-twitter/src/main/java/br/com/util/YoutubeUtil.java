@@ -60,72 +60,74 @@ public class YoutubeUtil {
 	 
 	   }
 
-		private Midia convertVideos(List<VideoEntry> videos , String idYoutube) {
-			VideoEntry videoEntry = videos.get(0);
-			String tipo="Youtube";
-			YouTubeMediaGroup mediaGroup = videoEntry.getMediaGroup();
-	        String location = validarURL(idYoutube);
-	      
-	        List<MediaCategory> categories = mediaGroup.getCategories();
-	        String categoria ="";
-	        for(MediaCategory mc:categories){
-	        	categoria =mc.getLabel();// Pega a Categoria do Video ex = music
-	        }
-	        List<String> thumbnails = new LinkedList<String>();
-	        for (MediaThumbnail mediaThumbnail : mediaGroup.getThumbnails()) {
-	            thumbnails.add(mediaThumbnail.getUrl());
-	        }
-	        String title = videoEntry.getTitle().getPlainText();//titulo video
-	        JSONObject json =google(title);
-	        Midia video = null;
-	        try {
-	        	if(json!=null){
-	        		String genero = "";
-	        		if(json.get("genre").equals("null")==false){
-	        			 genero = (String)json.get("genre").toString();
-	        		}
-	        		
-					String album = (String) json.get("artwork_url").toString();
-					video = new Midia(title, location, categoria,album, genero, tipo);
-	        	}else{
-					video = new Midia(title, location, categoria,"http://static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg","", tipo);
-	        	}
-				
-			} catch (JSONException e) {
-				
-				
-			}
-	        
-	        
-	        
+	private Midia convertVideos(List<VideoEntry> videos , String idYoutube) {
+		VideoEntry videoEntry = videos.get(0);
+		String tipo="Youtube";
+		String imgMidia = idYoutube;
+		YouTubeMediaGroup mediaGroup = videoEntry.getMediaGroup();
+        String location = validarURL(idYoutube);
+      
+        List<MediaCategory> categories = mediaGroup.getCategories();
+        String categoria ="";
+        for(MediaCategory mc:categories){
+        	categoria =mc.getLabel();// Pega a Categoria do Video ex = music
+        }
+        List<String> thumbnails = new LinkedList<String>();
+        for (MediaThumbnail mediaThumbnail : mediaGroup.getThumbnails()) {
+            thumbnails.add(mediaThumbnail.getUrl());
+        }
+        String title = videoEntry.getTitle().getPlainText();//titulo video
+        JSONObject json =google(title);
+        
+        Midia video = null;
+        try {
+        	if(json!=null){
+        		String genero = "";
+        		if(json.get("genre").equals("null")==false){
+        			 genero = (String)json.get("genre").toString();
+        		}
+        		
+				String album = (String) json.get("artwork_url").toString();
+				video = new Midia(title, location, categoria,album, genero, tipo,imgMidia);
+        	}else{
+				video = new Midia(title, location, categoria,"http://static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg","", tipo,imgMidia);
+        	}
 			
-	       return video;
-	 
-	   }
-		private JSONObject google(String titulo){
-			String url = google.search(titulo);
-			JSONObject json = null;
-			if(url!=null && url.contains("soundcloud.com")){
-				Soundcloud soundcloud = new Soundcloud();
-				String trankid;
-				try {
-					trankid = soundcloud.getApiUrlFromPermalink(url);
-					json = Http.getJSON(soundcloud.getHttpResponse(trankid));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			return json;
-		}
-		private String validarURL(String url){
-			List<String> strings = new ArrayList<String>();
-			strings.addAll(Arrays.asList(url.split("=")));
-			String urlvalida ="";
-			for(String str:strings){
-				urlvalida+=str;
-			}
+		} catch (JSONException e) {
 			
-			return urlvalida;
+			
 		}
+        
+        
+        
+		
+       return video;
+ 
+   }
+	private JSONObject google(String titulo){
+		String url = google.search(titulo);
+		JSONObject json = null;
+		if(url!=null && url.contains("soundcloud.com")){
+			Soundcloud soundcloud = new Soundcloud();
+			String trankid;
+			try {
+				trankid = soundcloud.getApiUrlFromPermalink(url);
+				json = Http.getJSON(soundcloud.getHttpResponse(trankid));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return json;
 	}
+	private String validarURL(String url){
+		List<String> strings = new ArrayList<String>();
+		strings.addAll(Arrays.asList(url.split("=")));
+		String urlvalida ="";
+		for(String str:strings){
+			urlvalida+=str;
+		}
+		
+		return urlvalida;
+	}
+}

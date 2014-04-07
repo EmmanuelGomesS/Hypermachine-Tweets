@@ -40,14 +40,31 @@ public class WebSiteController {
 		Midia v=null;
 		int popular =0;
 		for(Tweets tw:tweets){
-			if(tw.getPopularidade()>popular){
-				popular = tw.getPopularidade();
-				v= tw.getMidia();
+			if(tw.getMidia().getTipo().equals("Youtube")){
+				if(tw.getPopularidade()>popular){
+					popular = tw.getPopularidade();
+					v= tw.getMidia();
+				}
 			}
 		}
-		listavideos();
-		listamusicas();
+		music();
 		result.include("v", v);
+	}
+	public void music(){
+		//Musicas Mais Curtida
+		List<Tweets> tweets = tweetsDao.listarTudo();
+		Midia m=null;
+		int popular =0;
+		for(Tweets tw:tweets){
+			if(tw.getMidia().getTipo().equals("Soundcloud")){
+				if(tw.getPopularidade()>=popular){
+					popular = tw.getPopularidade();
+					m= tw.getMidia();
+				}
+			}
+		}
+		System.out.println("MUSIC: "+m.getTitulo());
+		result.include("m", m);
 	}
 	
 	
@@ -113,7 +130,7 @@ public class WebSiteController {
 	}
 	
 	//Estilos Musicais
-		@Path("musica/cateroria/pop")
+		@Path("/pop")
 		@Get
 		public void pop(){
 			//Lista Musicas Usando o Soundcloud
@@ -131,7 +148,7 @@ public class WebSiteController {
 
 			result.include("litmusicas", litmusicas);
 		}
-		@Path("musica/cateroria/rock")
+		@Path("/rock")
 		@Get
 		public void rock(){
 			List<Midia> litmusicas = new ArrayList<Midia>();
@@ -146,7 +163,7 @@ public class WebSiteController {
 
 			result.include("litmusicas", litmusicas);
 		}
-		@Path("musica/cateroria/forro")
+		@Path("/forro")
 		@Get
 		public void forro(){
 			List<Midia> litmusicas = new ArrayList<Midia>();
@@ -163,7 +180,7 @@ public class WebSiteController {
 
 			result.include("litmusicas", litmusicas);
 		}
-		@Path("musica/cateroria/dance")
+		@Path("/dance")
 		@Get
 		public void dance(){
 			List<Midia> litmusicas = new ArrayList<Midia>();

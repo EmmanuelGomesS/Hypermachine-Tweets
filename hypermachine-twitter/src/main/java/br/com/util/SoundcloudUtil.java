@@ -17,14 +17,20 @@ public class SoundcloudUtil {
 		Midia musica = null;
 		try {
 			String location = soundcloud.getApiUrlFromPermalink(url);
-			System.out.println("Id: "+location);
+			String imgMidia= "";
 			JSONObject json = Http.getJSON(soundcloud.getHttpResponse(location));
-			String titulo = (String) json.get("title");
-			String genero = (String) json.get("genre");
-			String album = (String) json.get("attachments_uri");
+			String titulo = (String) json.get("title").toString();
+			String genero = (String) json.get("genre").toString();
+			String album = (String) json.get("artwork_url").toString();
+			if(album=="null"){
+				JSONObject js = json.getJSONObject("user");
+				album = (String) js.get("avatar_url").toString();
+				
+			}
+			imgMidia = album;
 			String categoria = "Musica";
 			String tipo = "Soundcloud";
-			musica = new Midia(titulo, location, categoria, album, genero, tipo);
+			musica = new Midia(titulo, location, categoria, album, genero, tipo,imgMidia);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

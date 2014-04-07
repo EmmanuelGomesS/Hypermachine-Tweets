@@ -1,5 +1,5 @@
 
-<%@ include file="../../../cabecalho.jsp" %>
+<%@ include file="../../../inicio.jspf" %>
 
 <!--  <form action="<c:url value="/login"/>" name="loginForm" method="POST">
 	<fieldset>

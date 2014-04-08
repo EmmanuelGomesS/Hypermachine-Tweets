@@ -1,8 +1,9 @@
-<%@ include file="../../../cabecalhoH.jsp" %>
+<%@ include file="../../../cabecalho.jsp" %>
 	
      
       
-      
+     <div class="wrapper">
+<div id="head-top">	
         <div class="item active">
           
           <div class="container">
@@ -44,7 +45,8 @@
 						</div>
 		</div>
 	</div>
-
+</div>
+</div>
 </div>
 
 <script>

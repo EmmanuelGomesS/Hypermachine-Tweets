@@ -6,6 +6,8 @@
 	<head>
 		<link href="css/tema.css" rel="stylesheet">
 		<title>Hypermachine Tweets</title>
+		<script type="text/javascript" src="js/all.08550af.js"></script> 
+		
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
 	<script src="js/all.114703d6e.js" type="text/javascript"></script>
 	
@@ -114,7 +116,6 @@ $(function(){
 						  </li>
 						</ul>
 						<form class="navbar-form navbar-right visible-lg" role="search" action="<c:url value="/busca"/>" name="busca" method="POST">
-						
 						  <div class="form-group">
 							<input type="search" class="form-control" placeholder="Busca" name="search">
 						  </div>
@@ -124,6 +125,5 @@ $(function(){
 				</div>
 			</div>
 		</div>
-		<br>
-		<br>
+
 

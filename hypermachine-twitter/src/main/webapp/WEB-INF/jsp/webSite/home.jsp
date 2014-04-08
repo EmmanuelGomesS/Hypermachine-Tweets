@@ -1,12 +1,8 @@
 <%@ include file="../../../cabecalhoH.jsp" %>
 	
-<div id="myCarousel" class="carousel slide">
      
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-      </ol>
-      <div class="carousel-inner">
+      
+      
         <div class="item active">
           
           <div class="container">
@@ -38,11 +34,7 @@
 			</div>
         </div>
       </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="icon-prev"></span></a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="icon-next"></span></a>
-    </div>
-
-</div>
+    
 
 <div class="container">
 	<div class="row">
@@ -59,4 +51,3 @@
  $('.carousel').carousel() 
 </script>
 </body>
-</html>ml>

@@ -11,7 +11,7 @@ public class MidiaUser {
 	private Midia midia;
 	private List<String > users;
 	private List<Midia> midialist;
-	private String search;
+	private String listUser="";
 	
 	public MidiaUser() {
 		this.users = new ArrayList<String>();
@@ -34,17 +34,29 @@ public class MidiaUser {
 	public List<String> getUsers() {
 		return users;
 	}
-	public void setSearch(String search) {
-		this.search = search;
+	public void setlistUser(String listUser) {
+		this.listUser = listUser;
 	}
-	public String getSearch() {
-		return search;
+	public void setlistUser(UserTwitter usr) {
+		System.out.println("Search Usr: "+usr.getNome());
+		listUser =listUser+ "<a href="+"https://twitter.com/"+usr.getNome()+">"+
+				"<img width="+20+" height="+10+""
+				+" src="+usr.getAvatar()+" "+"/>"+"</a>";
+	}
+	public String getlistUser() {
+		return listUser;
 	}
 	public Midia getMidia() {
 		return midia;
 	}
 	public void addUsr(String nome){
 		this.users.add(nome);
+	}
+	public List<Midia> getMidialist() {
+		return midialist;
+	}
+	public void setMidialist(List<Midia> midialist) {
+		this.midialist = midialist;
 	}
 
 }

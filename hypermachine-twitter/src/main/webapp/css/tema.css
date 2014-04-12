@@ -1225,8 +1225,9 @@ line-height: 1.428571429;
 
 }
 .facebook{
-  background-color: #dfeffc;
-color: #2e6e9e;
+
+  background-color: #354c8c;
+color: #F5F8FA;
 font-weight:bold;
 border: 1px solid #3b5998;
 float: right;
@@ -1235,7 +1236,18 @@ border-radius: 5px;
 margin-right: -5px;
 }
 
-
+.img {
+  
+position: absolute;
+float: right;
+margin-right: 15px;
+padding: 0px 2px;
+margin-top: 0px;
+margin-bottom: 6px;
+background-color: transparent;
+border: 1px solid transparent;
+border-radius: 4px;
+}
 
 
 .ovideo{
@@ -1329,7 +1341,7 @@ h3,
 
 
 .page-header {
-  margin: -100px 0 20px;
+  margin: 40px 0 20px;
   border-bottom: 2px solid #808080;
   color: #000000;
   margin-right: 200px;

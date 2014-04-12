@@ -13,6 +13,7 @@ import br.com.dao.UserTwitterDao;
 import br.com.modelo.Midia;
 import br.com.modelo.Tweets;
 import br.com.modelo.UserTwitter;
+import br.com.util.MidiaUser;
 
 @Resource
 public class WebSiteController {
@@ -22,6 +23,8 @@ public class WebSiteController {
 	private UserTwitterDao userDao;
 	private Result result;
 	private List<UserTwitter> litUsres;
+	private String soundcloud="Soundcloud";
+	private String youtube="Youtube";
 	
 	public WebSiteController(MidiaDao midiaDao,UserTwitterDao userDao,TweetsDao tweetsDao,Result result) {
 		
@@ -40,7 +43,7 @@ public class WebSiteController {
 		Midia v=null;
 		int popular =0;
 		for(Tweets tw:tweets){
-			if(tw.getMidia().getTipo().equals("Youtube")){
+			if(tw.getMidia().getTipo().equals(youtube)){
 				if(tw.getPopularidade()>popular){
 					popular = tw.getPopularidade();
 					v= tw.getMidia();
@@ -56,7 +59,7 @@ public class WebSiteController {
 		Midia m=null;
 		int popular =0;
 		for(Tweets tw:tweets){
-			if(tw.getMidia().getTipo().equals("Soundcloud")){
+			if(tw.getMidia().getTipo().equals(soundcloud)){
 				if(tw.getPopularidade()>=popular){
 					popular = tw.getPopularidade();
 					m= tw.getMidia();
@@ -72,49 +75,65 @@ public class WebSiteController {
 	@Get
 	public void listavideos(){
 		//Lista Musicas Usando o Youtube
-		List<Midia> litvideos = new ArrayList<Midia>();
+		List<MidiaUser> listvideos = new ArrayList<MidiaUser>();
 		List<Tweets> tweets = tweetsDao.listarTudo();
 				
 		for(Tweets tw:tweets){
-			if(tw.getMidia().getTipo().equals("Youtube")){
-				litvideos.add(tw.getMidia());
+			if(tw.getMidia().getTipo().equals(youtube)){
+				MidiaUser mid = new MidiaUser(tw.getMidia());
+				if(listvideos.size()>0){
+					
+					for(int i=0;i<listvideos.size();i++){						
+						if(mid.getMidia().getLocation().equals(listvideos.get(i).getMidia().getLocation())){
+							String usrlist=listvideos.get(i).getlistUser();
+							listvideos.get(i).setlistUser(tw.getUsertwitter());
+							mid.setlistUser(usrlist);														
+						}
+					}
+					mid.setlistUser(tw.getUsertwitter());
+					listvideos.add(mid);
+					
+				}
+				else{					
+					mid.setlistUser(tw.getUsertwitter());
+					listvideos.add(mid);
+				}
 			}
 		}
-		result.include("litvideos", litvideos);
+		result.include("listvideos", listvideos);
 	}
+	
 	@Path("/listamusicas")
 	@Get
 	public void listamusicas(){
 		//Lista Musicas Usando o Soundcloud
-		List<Midia> litmusicas = new ArrayList<Midia>();
 		List<Tweets> tweets = tweetsDao.listarTudo();
+		List<MidiaUser> listmusicas = new ArrayList<MidiaUser>();
 		for(Tweets tw:tweets){
-			if(tw.getMidia().getTipo().equals("Soundcloud")){
-				litmusicas.add(tw.getMidia());
+			//System.out.println("USERTwwiter: "+tw.getUsertwitter().getAvatar());
+			if(tw.getMidia().getTipo().equals(soundcloud)){
+				MidiaUser mid = new MidiaUser(tw.getMidia());
+				if(listmusicas.size()>0){
+					
+					for(int i=0;i<listmusicas.size();i++){						
+						if(mid.getMidia().getLocation().equals(listmusicas.get(i).getMidia().getLocation())){
+							String usrlist=listmusicas.get(i).getlistUser();
+							listmusicas.get(i).setlistUser(tw.getUsertwitter());
+							mid.setlistUser(usrlist);														
+						}
+					}
+					mid.setlistUser(tw.getUsertwitter());
+					listmusicas.add(mid);
+					
+				}
+				else{					
+					mid.setlistUser(tw.getUsertwitter());
+					listmusicas.add(mid);
+				}
 			}
 		}
-
-		result.include("litmusicas", litmusicas);
+		result.include("listmusicas", listmusicas);
 	}
-
-	public void listaUsuarios(String location){
-		//Lista Usuarios que Twwets uma Midia
-		List<Tweets> tweets = tweetsDao.listarTudo();
-		List<UserTwitter> litUsres = new ArrayList<UserTwitter>();
-		for(Tweets tw:tweets){
-			if(tw.getMidia().getLocation().equals(location)){
-				litUsres.add(tw.getUsertwitter());
-			}
-		}
-		if(litUsres.size()>0){
-			result.include("litUsres", litUsres);
-		}
-		else{
-			result.redirectTo(this).home();
-		}
-		
-	}
-	
 	
 	public void midiaAlbum(int id){
 		//Recebe o Id para pegar o album da midia
@@ -134,86 +153,169 @@ public class WebSiteController {
 		@Get
 		public void pop(){
 			//Lista Musicas Usando o Soundcloud
-			List<Midia> litmusicas = new ArrayList<Midia>();
+			List<MidiaUser> listmusicas = new ArrayList<MidiaUser>();
 			List<Tweets> tweets = tweetsDao.listarTudo();
 			for(Tweets tw:tweets){
-				if(tw.getMidia().getTipo().equals("Soundcloud")){
-					if(tw.getMidia().getGenero().contains("pop")||tw.getMidia().getGenero().contains("Pop")){
-						System.out.println("Pop: "+ tw.getMidia().getTitulo());
-						litmusicas.add(tw.getMidia());
+				if(tw.getMidia().getTipo().equals(soundcloud)){
+					if(tw.getMidia().getGenero().toUpperCase().contains("POP")){
+						MidiaUser mid = new MidiaUser(tw.getMidia());
+						if(listmusicas.size()>0){
+							
+							for(int i=0;i<listmusicas.size();i++){						
+								if(mid.getMidia().getLocation().equals(listmusicas.get(i).getMidia().getLocation())){
+									String usrlist=listmusicas.get(i).getlistUser();
+									listmusicas.get(i).setlistUser(tw.getUsertwitter());
+									mid.setlistUser(usrlist);														
+								}
+							}
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+							
+						}
+						else{					
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+						}
 					}
 					
 				}
 			}
 
-			result.include("litmusicas", litmusicas);
+			result.include("listmusicas", listmusicas);
 		}
 		@Path("/rock")
 		@Get
 		public void rock(){
-			List<Midia> litmusicas = new ArrayList<Midia>();
+			List<MidiaUser> listmusicas = new ArrayList<MidiaUser>();
 			List<Tweets> tweets = tweetsDao.listarTudo();
 			for(Tweets tw:tweets){
-				if(tw.getMidia().getTipo().equals("Soundcloud")){
-					if(tw.getMidia().getGenero().contains("Rock")||tw.getMidia().getGenero().contains("Metal")){
-					litmusicas.add(tw.getMidia());
+				if(tw.getMidia().getTipo().equals(soundcloud)){
+					if(tw.getMidia().getGenero().toUpperCase().contains("ROCK")||tw.getMidia().getGenero().toUpperCase().contains("METAL")){
+						MidiaUser mid = new MidiaUser(tw.getMidia());
+						if(listmusicas.size()>0){
+							
+							for(int i=0;i<listmusicas.size();i++){						
+								if(mid.getMidia().getLocation().equals(listmusicas.get(i).getMidia().getLocation())){
+									String usrlist=listmusicas.get(i).getlistUser();
+									listmusicas.get(i).setlistUser(tw.getUsertwitter());
+									mid.setlistUser(usrlist);														
+								}
+							}
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+							
+						}
+						else{					
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+						}
 					}
+					
 				}
 			}
 
-			result.include("litmusicas", litmusicas);
+			result.include("listmusicas", listmusicas);
 		}
 		@Path("/forro")
 		@Get
 		public void forro(){
-			List<Midia> litmusicas = new ArrayList<Midia>();
+			List<MidiaUser> listmusicas = new ArrayList<MidiaUser>();
 			List<Tweets> tweets = tweetsDao.listarTudo();
 			for(Tweets tw:tweets){
-				if(tw.getMidia().getTipo().equals("Soundcloud")){
-					if(tw.getMidia().getGenero().contains("Forro")){
-						System.out.println("FORRO: "+tw.getMidia().getTitulo());
-						litmusicas.add(tw.getMidia());
+				if(tw.getMidia().getTipo().equals(soundcloud)){
+					if(tw.getMidia().getGenero().toUpperCase().contains("FORRO")){
+						MidiaUser mid = new MidiaUser(tw.getMidia());
+						if(listmusicas.size()>0){
+							
+							for(int i=0;i<listmusicas.size();i++){						
+								if(mid.getMidia().getLocation().equals(listmusicas.get(i).getMidia().getLocation())){
+									String usrlist=listmusicas.get(i).getlistUser();
+									listmusicas.get(i).setlistUser(tw.getUsertwitter());
+									mid.setlistUser(usrlist);														
+								}
+							}
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+							
+						}
+						else{					
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+						}
 					}
 					
 				}
 			}
 
-			result.include("litmusicas", litmusicas);
+			result.include("listmusicas", listmusicas);
 		}
 		@Path("/dance")
 		@Get
 		public void dance(){
-			List<Midia> litmusicas = new ArrayList<Midia>();
+			List<MidiaUser> listmusicas = new ArrayList<MidiaUser>();
 			List<Tweets> tweets = tweetsDao.listarTudo();
 			for(Tweets tw:tweets){
-				if(tw.getMidia().getTipo().equals("Soundcloud")){
-					if(tw.getMidia().getGenero().contains("Dance")||tw.getMidia().getGenero().contains("Electro")){
-						litmusicas.add(tw.getMidia());
-						System.out.println("DANCE: "+tw.getMidia().getTitulo());
-
+				if(tw.getMidia().getTipo().equals(soundcloud)){
+					if(tw.getMidia().getGenero().toUpperCase().contains("DANCE")||tw.getMidia().getGenero().toUpperCase().contains("ELECTRO")){
+						MidiaUser mid = new MidiaUser(tw.getMidia());
+						if(listmusicas.size()>0){
+							
+							for(int i=0;i<listmusicas.size();i++){						
+								if(mid.getMidia().getLocation().equals(listmusicas.get(i).getMidia().getLocation())){
+									String usrlist=listmusicas.get(i).getlistUser();
+									listmusicas.get(i).setlistUser(tw.getUsertwitter());
+									mid.setlistUser(usrlist);														
+								}
+							}
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+							
+						}
+						else{					
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+						}
 					}
 					
 				}
 			}
 
-			result.include("litmusicas", litmusicas);
+			result.include("listmusicas", listmusicas);
 		}
 		
 		@Path("/busca")
 		public void busca(String search){
 			List<Midia> litmusicas = new ArrayList<Midia>();
+			List<MidiaUser> listmusicas = new ArrayList<MidiaUser>();
 			List<Tweets> tweets = tweetsDao.listarTudo();
 			if(search==null){search="default";}
 			for(Tweets tw:tweets){
-				if(tw.getMidia().getTipo().equals("Soundcloud")){
+				if(tw.getMidia().getTipo().equals(soundcloud)){
 					if(tw.getMidia().getTitulo().toUpperCase().contains(search.toUpperCase())){
 						String location = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/"+tw.getMidia().getLocation();
 						String tipo = tw.getMidia().getTipo().toLowerCase();
 						Midia midia = new Midia(null, location, null, tw.getMidia().getAlbum(), null, tipo, tw.getMidia().getImgMidia());
-						litmusicas.add(midia);
+						MidiaUser mid = new MidiaUser(midia);
+						if(listmusicas.size()>0){
+							
+							for(int i=0;i<listmusicas.size();i++){						
+								if(mid.getMidia().getLocation().equals(listmusicas.get(i).getMidia().getLocation())){
+									String usrlist=listmusicas.get(i).getlistUser();
+									listmusicas.get(i).setlistUser(tw.getUsertwitter());
+									mid.setlistUser(usrlist);														
+								}
+							}
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+							
+						}
+						else{					
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+						}
 					}
 				}
-				else if(tw.getMidia().getTipo().equals("Youtube")){
+				else if(tw.getMidia().getTipo().equals(youtube)){
 					if(tw.getMidia().getTitulo().toUpperCase().contains(search.toUpperCase())){
 						String location = "http://www.youtube.com/embed/"+tw.getMidia().getLocation();
 						String imgMidia = "http://i.ytimg.com/vi/"+tw.getMidia().getImgMidia()+"/mqdefault.jpg";
@@ -221,11 +323,28 @@ public class WebSiteController {
 						
 						Midia midia = new Midia(null, location, null, tw.getMidia().getAlbum(), null, tipo, imgMidia);
 
-						litmusicas.add(midia);
+						MidiaUser mid = new MidiaUser(midia);
+						if(listmusicas.size()>0){
+							
+							for(int i=0;i<listmusicas.size();i++){						
+								if(mid.getMidia().getLocation().equals(listmusicas.get(i).getMidia().getLocation())){
+									String usrlist=listmusicas.get(i).getlistUser();
+									listmusicas.get(i).setlistUser(tw.getUsertwitter());
+									mid.setlistUser(usrlist);														
+								}
+							}
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+							
+						}
+						else{					
+							mid.setlistUser(tw.getUsertwitter());
+							listmusicas.add(mid);
+						}
 					}
 				}
 			}
-			result.include("litmusicas", litmusicas);
+			result.include("listmusicas", listmusicas);
 		}
 		
 }

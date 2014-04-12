@@ -1,14 +1,10 @@
 <%@ include file="../../../cabecalho.jsp" %>
-	
-     
-      
-     <div class="wrapper">
-<div id="head-top">	
-        <div class="item active">
+
+     <div class="item active">
           
           <div class="container">
 			<div class="row" >
-				
+
 				<div class="legenda">
 					<h1 class="musi">A música mais popular.</h1>
 						<div class="amusica">
@@ -25,16 +21,17 @@
 						<h1 class="vid">O vídeo mais popular.</h1>
 					</div>
 					<div class="ovideo">
-				
+
 							<iframe  width="600"  height="450"  
 								src="http://www.youtube.com/embed/${v.location}">
 								</iframe>
-						
+
 					</div>
 				</div>
 			</div>
-        </div>
-      </div>
+     
+      
+    
     
 
 <div class="container">

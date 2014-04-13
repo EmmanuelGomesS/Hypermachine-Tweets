@@ -24,8 +24,6 @@
 <body>
 	<div id="cabecalho">
     	<div id="conteudoCabecalho">
-        	<h1 id="logotipo"><span>Hypermachine - Twitter</span></h1><!-- HyperMachine logo-->
-            
             <div id="usuario">
 				<c:if test="${usuarioWeb.logado}">
 					<h2><span>Usuario: </span>${usuarioWeb.nome }</h2>
@@ -39,15 +37,11 @@
     	<form class="busca" >
 	    	<ul id="menuElementos">
 	        	<c:if test="${usuarioWeb.logado }">
-	        				<li><a href="<c:url value="/usertwitter/menu"/>">
-							Menu </a></li>
-							<li><a href="<c:url value="/usertwitter/formulario"/>">
-							Cadastar
-							</a></li>
-						
-							<li><a href="<c:url value="/usertwitter/lista"/>">
-							Listar
-							</a></li>
+	        				<li><a href="<c:url value="/usertwitter/menu"/>">Menu</a></li>
+							<li><a href="<c:url value="/usertwitter/formulario"/>">Cadastar</a></li>
+							<li><a href="<c:url value="/usertwitter/lista"/>">Listar</a></li>
+							<li><a id="sairSistema" href="<c:url value="/logout"/>">Sair</a></li>
+							<h2>Usuario: ${usuarioWeb.nome }</h2>
 						</ul>
 				</c:if>
 			    

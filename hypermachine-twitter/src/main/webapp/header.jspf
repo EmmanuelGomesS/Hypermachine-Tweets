@@ -37,7 +37,7 @@
     	<form class="busca" >
 	    	<ul id="menuElementos">
 	        	<c:if test="${usuarioWeb.logado }">
-	        				<li><a href="<c:url value="/usertwitter/menu"/>">Menu</a></li>
+	        				<li><a href="<c:url value="/"/>">Site Hypermachine</a></li>
 							<li><a href="<c:url value="/usertwitter/formulario"/>">Cadastar</a></li>
 							<li><a href="<c:url value="/usertwitter/lista"/>">Listar</a></li>
 							<li><a id="sairSistema" href="<c:url value="/logout"/>">Sair</a></li>

@@ -43,7 +43,7 @@ public class AdministradorController {
 		validator.onErrorUsePageOf(this).loginForm();
 		userinfo.login(carregado);
 		
-		result.redirectTo(UsertwitterController.class).menu();
+		result.redirectTo(UsertwitterController.class).lista();
 	
 	}
 	@Path("/logout")
